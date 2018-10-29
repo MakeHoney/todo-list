@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-    name: 'SignIn',
+    name: 'sign-in',
     data () {
         return {
             uid: '',
@@ -20,9 +20,7 @@ export default {
     methods: {
         async onSubmit (uid, password) {
             await this.$store.dispatch('signIn', { uid, password })
-            // redirect ?
-            // this.redirect()
-            this.$router.push('home')
+            this.$router.push({ name: 'home' })
         }
     }
 }

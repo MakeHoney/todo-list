@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,7 @@ export default new Vuex.Store({
     },
     actions: {
         async signIn ({ commit }, { uid, password }) {
-            let res = await axios.post('http://13.209.8.64:3333', { uid, password })
+            let res = await axios.post('http://localhost:8888/sign-in', { uid, password })
             let token = res.data
             commit('signIn', token)
         },
