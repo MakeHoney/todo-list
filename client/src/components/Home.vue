@@ -6,7 +6,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'home',
     data () {
@@ -15,7 +14,9 @@ export default {
         }
     },
     async created () {
-        let res = await axios.get('http://13.209.8.64:3333/home')
+        let res = await this.$axios.get('http://localhost:8888/home')
+
+        console.log(res)
         this.greeting = res.data.greeting
     }
 }
