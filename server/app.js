@@ -1,7 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const testRouter = require('./api/test')
+const homeRouter = require('./api/home/router')
+const signInRouter = require('./api/signIn/router')
+const signUpRouter = require('./api/signUp/router')
 
 let app = express()
 
@@ -11,7 +13,9 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ urlencoded: true }))
 
-app.use('/home', testRouter)
+app.use('/home', homeRouter)
+app.use('/sign-in', signInRouter)
+app.use('./sign-up', signUpRouter)
 
 app.listen(app.get('port'), () => {
     console.log(`Server Running on port ${app.get('port')}`)
