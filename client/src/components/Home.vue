@@ -15,8 +15,6 @@ export default {
     },
     async created () {
         let res = await this.$axios.get('http://localhost:8888/home')
-
-        console.log(res)
         this.greeting = res.data.greeting
     }
 }
