@@ -9,8 +9,11 @@ const User = new Schema({
         list: []
     }
 })
+/**
+ * don't use arrow func: no lexical scope!
+ */
 
-// don't use arrow func: no lexical scope!
+// statics -> for class
 User.statics.create = function (uid, password) {
     const user = new this({
         uid,
@@ -19,7 +22,6 @@ User.statics.create = function (uid, password) {
     return user.save()
 }
 
-// statics -> for class
 User.statics.findOneByUID = function (uid) {
     return this.findOne({
         uid
@@ -29,6 +31,24 @@ User.statics.findOneByUID = function (uid) {
 // methods -> for specific instance
 User.methods.verify = function (password) {
     return this.password === encrypt(password)
+}
+
+User.methods.createTodo = function ({ 
+    title,
+    description,
+    deadline, 
+    priority 
+}) {
+    // daedline 설정
+    let foo
+    this.todo.list.push({
+        title,
+        description,
+        isComplete: false,
+        deadline,
+        priority,
+        isExpired: foo
+    })
 }
 
 module.exports = mongoose.model('User', User)
