@@ -4,7 +4,10 @@ const Schema = mongoose.Schema
 
 const User = new Schema({
     uid: String,
-    password: String
+    password: String,
+    todo: {
+        list: []
+    }
 })
 
 // don't use arrow func: no lexical scope!
