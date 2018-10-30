@@ -7,6 +7,7 @@ const config = require('./config')
 let app = express()
 
 app.set('port', process.env.PORT || 8888)
+app.set('jwt-secret', config.secret)
 
 app.use(cors())
 app.use(bodyParser.json())
