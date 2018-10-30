@@ -1,9 +1,12 @@
 const express = require('express')
-const { register, signIn } = require('./controller')
+const authCheck = require('../middlewares/auth-check')
+const { register, signIn, check } = require('./controller')
 const router = express.Router()
+
+router.use('/check', authCheck)
 
 router.post('/sign-in', signIn)
 router.post('/sign-up', register)
-router.get('/auth-check')
+router.get('/check', check)
 
 module.exports = router

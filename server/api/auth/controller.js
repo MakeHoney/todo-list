@@ -1,7 +1,7 @@
 const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 
-exports.register = async (req, res, next) => {
+exports.register = async (req, res) => {
     const { uid, password } = req.body
     const createUser = user => {
         if (user) {
@@ -25,7 +25,7 @@ exports.register = async (req, res, next) => {
     }
 }
 
-exports.signIn = async (req, res, next) => {
+exports.signIn = async (req, res) => {
     const { uid, password } = req.body
     const secret = req.app.get('jwt-secret')
 
@@ -67,4 +67,11 @@ exports.signIn = async (req, res, next) => {
             message: err.message
         })
     }
+}
+
+exports.check = (req, res) => {
+    res.json({
+        success: true,
+        info: req.decoded
+    })
 }
