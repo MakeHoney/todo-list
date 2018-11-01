@@ -1,14 +1,25 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/sign-in">Sign In</router-link> |
-      <router-link to="/sign-up">Sign Up</router-link>
+        <a href="#" @click="signOut" v-if="accessToken">Sign out</a>
     </div>
     <router-view/>
   </div>
 </template>
-
+<script>
+    export default {
+        methods: {
+            signOut () {
+                this.$store.commit('signOut')
+            }
+        },
+        computed: {
+            accessToken () {
+                return this.$store.state.accessToken
+            }
+        }
+    }
+</script>
 <style>
 
 </style>

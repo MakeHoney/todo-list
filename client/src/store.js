@@ -6,21 +6,38 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        accessToken: null
+        accessToken: localStorage.getItem('accessToken')
+    },
+    getters: {
+        accessToken: state => state.accessToken
     },
     mutations: {
-        signIn (state, { accessToken }) {
-            state.accessToken = accessToken
+        signIn (state, { token }) {
+            state.accessToken = token
+            localStorage.setItem('accessToken', token)
         },
         signOut (state) {
             state.accessToken = null
+            localStorage.removeItem('accessToken')
         }
     },
     actions: {
         async signIn ({ commit }, { uid, password }) {
-            let res = await axios.post('http://localhost:8888/sign-in', { uid, password })
-            let token = res.data
-            commit('signIn', token)
+            let url = 'http://localhost:8888/auth/sign-in'
+            try {
+                let { data } = await axios.post(url, { uid, password })
+                commit('signIn', data)
+            } catch (err) {
+                throw err
+            }
+        },
+        async signUp ({ commit }, { uid, password }) {
+            let url = 'http://localhost:8888/auth/sign-up'
+            try {
+                await axios.post(url, { uid, password })
+            } catch (err) {
+                throw err
+            }
         },
         signOut ({ commit }) {
             commit('signOut')
