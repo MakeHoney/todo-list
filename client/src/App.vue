@@ -23,16 +23,19 @@
     }
 </script>
 
-<style scoped>
-#title {
-    text-align: center;
-    font-weight: bold;
-    padding: 10px;
-    margin-top: 10px;
-}
-#nav {
-    background-color: #6aafe6;
-    padding: 50px;
-    text-align: right;
-}
+<style>
+    body {
+        background-color: #f0e5de;
+    }
+    #title {
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    #nav {
+        background-color: #6aafe6;
+        padding: 50px;
+        text-align: right;
+    }
 </style>

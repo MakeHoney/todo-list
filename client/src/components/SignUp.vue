@@ -21,6 +21,9 @@
     </div>
 </template>
 <script>
+    /**
+     * 로그인 상태에서 회원가입 진입시 리디렉션하기
+     * */
 export default {
     name: 'sign-up',
     data () {
@@ -52,7 +55,7 @@ export default {
         background-color: #e4e3e4;
         border-radius: 25px;
         text-align: center;
-        width: 40%;
+        width: 50%;
         height: 70%;
         padding: 50px;
         margin: 40px auto;

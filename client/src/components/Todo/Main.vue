@@ -52,12 +52,12 @@
         padding-bottom: 5%;
     }
     .todo-container {
-        position: relative;
+        /*position: relative;*/
         border-radius: 15px;
         background-color: #8ec0e4;
         text-align: center;
-        margin: 20px auto 20px auto;
-        padding: 5%;
+        margin: 40px auto 20px auto;
+        padding: 50px;
         width: 60%;
     }
     .form-trigger-button {
