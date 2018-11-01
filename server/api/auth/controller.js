@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
     }
 
     try {
-        let userExist = 
+        let userExist =
         await User.findOneByUID(uid)
         await createUser(userExist)
         res.json({
@@ -31,7 +31,7 @@ exports.signIn = async (req, res) => {
 
     const check = user => {
         if (!user) {
-            throw new Error("user doesn't exsit!")
+            throw new Error("user doesn't exist!")
         } else {
             if(user.verify(password)) {
                 return new Promise((resolve, reject) => {

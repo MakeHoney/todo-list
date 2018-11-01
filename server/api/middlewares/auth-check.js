@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
         })
     }
 
-    const check = () => { 
+    const check = () => {
         return new Promise((resolve, reject) => {
             jwt.verify(token, req.app.get('jwt-secret'), (err, decoded) => {
                 if (err) reject(err)
@@ -20,8 +20,7 @@ module.exports = async (req, res, next) => {
     }
 
     try {
-        let decoded = await check()
-        req.decoded = decoded
+        req.decoded = await check()
         next()
     } catch (err) {
         res.json({
