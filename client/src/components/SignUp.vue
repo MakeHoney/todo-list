@@ -61,6 +61,7 @@ export default {
         display: block;
         padding: 10px;
         margin: 10px auto 10px auto;
+        width: 100%;
     }
     #submit {
         display: block;

@@ -11,7 +11,7 @@
 
 <script>
 import SignIn from './SignIn'
-import Todo from './Todo'
+import Todo from './Todo/Main'
 import { mapGetters } from 'vuex'
 export default {
     name: 'home',

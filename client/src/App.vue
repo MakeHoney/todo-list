@@ -31,8 +31,8 @@
     margin-top: 10px;
 }
 #nav {
-    margin: 10px 20px 0 0;
-    padding: 10px;
+    background-color: #6aafe6;
+    padding: 50px;
     text-align: right;
 }
 </style>
