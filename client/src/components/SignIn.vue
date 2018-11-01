@@ -36,7 +36,6 @@ export default {
                 [this.userInfo.uid, this.userInfo.password] = ['']
                 this.$refs.authFailed.show()
             }
-            // this.$router.push({ name: 'home' })
         }
     }
 }
@@ -44,8 +43,10 @@ export default {
 
 <style scoped>
     .login-form {
+        background-color: #e4e3e4;
+        border-radius: 25px;
         text-align: center;
-        width: 70%;
+        width: 40%;
         height: 70%;
         padding: 50px;
         margin: 40px auto;

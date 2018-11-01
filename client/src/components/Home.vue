@@ -4,13 +4,14 @@
             <sign-in/>
         </div>
         <div v-else>
-            <h2>Home</h2>
+            <todo/>
         </div>
     </div>
 </template>
 
 <script>
 import SignIn from './SignIn'
+import Todo from './Todo'
 import { mapGetters } from 'vuex'
 export default {
     name: 'home',
@@ -24,7 +25,8 @@ export default {
         ])
     },
     components: {
-        SignIn
+        SignIn,
+        Todo
     },
     async created () {
     }

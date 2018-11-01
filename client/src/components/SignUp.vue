@@ -49,8 +49,10 @@ export default {
 
 <style scoped>
     .signup-form {
+        background-color: #e4e3e4;
+        border-radius: 25px;
         text-align: center;
-        width: 70%;
+        width: 40%;
         height: 70%;
         padding: 50px;
         margin: 40px auto;
