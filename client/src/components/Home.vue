@@ -11,6 +11,7 @@
 
 <script>
 import SignIn from './SignIn'
+import { mapGetters } from 'vuex'
 export default {
     name: 'home',
     data () {
@@ -18,9 +19,9 @@ export default {
         }
     },
     computed: {
-        accessToken () {
-            return this.$store.getters.accessToken
-        }
+        ...mapGetters([
+            'accessToken'
+        ])
     },
     components: {
         SignIn

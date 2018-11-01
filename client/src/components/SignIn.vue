@@ -16,6 +16,7 @@
         </b-modal>
     </div>
 </template>
+
 <script>
 export default {
     name: 'sign-in',
@@ -41,7 +42,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .login-form {
         text-align: center;
         width: 70%;

@@ -1,6 +1,6 @@
 <template>
     <div class="sign-up">
-        <div class="login-form">
+        <div class="signup-form">
             <h2>회원가입</h2>
             <form @submit.prevent="onSubmit(uid, password)">
                 <input type="text" placeholder="아이디" id="uid" v-model="uid">
@@ -46,3 +46,23 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .signup-form {
+        text-align: center;
+        width: 70%;
+        height: 70%;
+        padding: 50px;
+        margin: 40px auto;
+    }
+    #uid, #password {
+        display: block;
+        padding: 10px;
+        margin: 10px auto 10px auto;
+    }
+    #submit {
+        display: block;
+        margin: 10px auto 10px auto;
+        padding: 0 10px 0 10px;
+    }
+</style>

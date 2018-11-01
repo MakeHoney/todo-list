@@ -7,6 +7,7 @@
   </div>
 </template>
 <script>
+    import { mapGetters } from 'vuex'
     export default {
         methods: {
             signOut () {
@@ -14,12 +15,13 @@
             }
         },
         computed: {
-            accessToken () {
-                return this.$store.state.accessToken
-            }
+            ...mapGetters([
+                'accessToken'
+            ])
         }
     }
 </script>
+
 <style>
 
 </style>
