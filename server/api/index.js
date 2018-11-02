@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-router.use('/home', require('./home'))
+router.use('/todo', require('./todo'))
 router.use('/auth', require('./auth'))
 
 module.exports = router
