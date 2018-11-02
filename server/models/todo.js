@@ -8,13 +8,18 @@ const Todo = new Schema({
     priority: Number,
     isComplete: Boolean,
     isExpired: Boolean,
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    }
+    ownerUID: String
 })
 
 Todo.statics.create = function (formData) {
-
     const todo = new this(formData)
+    todo.save()
 }
+
+Todo.statics.findTodosByUID = async function (uid) {
+    return await this.find({
+        ownerUID: uid
+    })
+}
+
+module.exports = mongoose.model('Todo', Todo)

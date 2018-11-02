@@ -27,7 +27,7 @@ User.statics.create = function (uid, password) {
 User.statics.findOneByUID = async function (uid) {
     // let a = await this.findOne({uid})
     // console.log(a.todo)
-    return this.findOne({
+    return await this.findOne({
         uid
     })
 }
@@ -35,24 +35,6 @@ User.statics.findOneByUID = async function (uid) {
 // methods -> for specific instance
 User.methods.verify = function (password) {
     return this.password === encrypt(password)
-}
-
-User.methods.createTodo = function ({
-    title,
-    description,
-    deadline,
-    priority
-}) {
-    // daedline 설정
-    let foo
-    this.todo.list.push({
-        title,
-        description,
-        isComplete: false,
-        deadline,
-        priority,
-        isExpired: 0
-    })
 }
 
 module.exports = mongoose.model('User', User)

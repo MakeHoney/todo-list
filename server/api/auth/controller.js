@@ -60,7 +60,7 @@ exports.signIn = async (req, res) => {
         let token = await check(userExist)
         res.json({
             message: 'signed in successfully!',
-            _id: userExist._id,
+            uid,
             token
         })
     } catch (err) {

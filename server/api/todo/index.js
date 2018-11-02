@@ -1,13 +1,9 @@
 const express = require('express')
+const { createTodo, loadTodoList } = require('./controller')
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
-    res.json({
-        greeting: 'hi'
-    })
-})
-
-router.post('/create')
+router.post('/read', loadTodoList)
+router.post('/create', createTodo)
 router.post('/delete')
 router.post('/update')
 
