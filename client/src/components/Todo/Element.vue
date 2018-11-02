@@ -1,13 +1,13 @@
 <template>
     <div class="todo-element">
-        <div class="el-container">
+        <div ref="elContainer" class="el-container">
             <p class="el-title">{{ title }} [{{ calculStar }}]</p>
             <p class="el-desc">{{ description }}</p>
             <input type="checkbox" class="checkbox" v-model="isChecked" :value="_id">
             <p class="el-deadline">마감 날짜: {{ deadline }}</p>
             <b-btn class="el-button" size="sm">수정</b-btn>
         </div>
-        {{ isChecked }}
+        {{ isExpired }}
     </div>
 </template>
 
@@ -30,12 +30,9 @@
         },
         watch: {
             isChecked () {
-                let elContainer = this.$el.querySelector('.el-container')
+                let elContainer = this.$refs['elContainer']
                 if(this.isChecked) {
                     this.$store.commit('addCheckedElement', this._id)
-                    // for(let key in this.$store.getters.checkedElements) {
-                    //     console.log(this.$store.getters.checkedElements[key])
-                    // }
                     elContainer.style.backgroundColor = '#276DE9'
                 } else {
                     this.$store.commit('deleteCheckedElement', this._id)

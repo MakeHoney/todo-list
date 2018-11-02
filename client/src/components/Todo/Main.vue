@@ -14,8 +14,11 @@
         </div>
         <b-btn class="form-trigger-button" @click="triggerForm()">Todo 등록</b-btn>
         <!--// checked 일때만 버튼 보이기-->
-        <b-btn class="form-trigger-button" @click="deleteCheckedTodo()">삭제</b-btn>
+        <b-btn class="form-trigger-button"  v-if="emptyCheck"
+                                            @click="deleteCheckedTodo()">삭제</b-btn>
+        <b-btn @click="deleteExpiredTodo()">abc</b-btn>
         {{ formData.ownerUID }}
+        {{ emptyCheck }}
 
         <b-modal ref="createForm" size="lg" hide-footer title="정보 입력">
             <!-- 입력 안된 경우 예외처리 -->
@@ -43,11 +46,11 @@
 
 <script>
     import TodoElement from './Element'
+    import { mapGetters } from 'vuex'
     export default {
         name: 'todo-main',
         data () {
             return {
-                todoList: [],
                 formData: {
                     title: '',
                     description: '',
@@ -61,6 +64,13 @@
         },
         components: {
             TodoElement
+        },
+        computed: {
+            ...mapGetters([
+                'todoList',
+                'checkedElements',
+                'emptyCheck'
+            ])
         },
         methods: {
             triggerForm () {
@@ -77,18 +87,23 @@
                 : formInstance.isExpired = true
 
                 await this.$store.dispatch('createTodo', formInstance)
-                this.todoList.push(formInstance)
                 this.$refs.createForm.hide()
 
                 this.resetForm()
             },
             async deleteCheckedTodo () {
-                const checkedTodoList = this.$store.state.checkedElements
-                await this.$store.dispatch('deleteTodo', checkedTodoList)
+                await this.$store.dispatch('deleteTodo', this.checkedElements)
+            },
+            async deleteExpiredTodo () {
+                const elements = this.todoList.filter(todoObj => todoObj.isExpired)
+                let expiredElemObj = {}
+                elements.forEach(elem => {
+                    expiredElemObj[elem._id] = elem._id
+                })
+                await this.$store.dispatch('deleteTodo', expiredElemObj)
             },
             async loadTodoList() {
                 await this.$store.dispatch('loadTodoList', this.formData.ownerUID)
-                this.todoList = this.$store.getters.todoList
             },
             resetForm () {
                 this.formData.title = ''
