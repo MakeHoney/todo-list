@@ -12,7 +12,7 @@
             </div>
         </div>
         <b-btn class="form-trigger-button" @click="triggerForm()">Todo 등록</b-btn>
-        {{ formData.ownerId }}
+        {{ formData.ownerUID }}
 
         <b-modal ref="createForm" size="lg" hide-footer title="정보 입력">
             <!-- 입력 안된 경우 예외처리 -->
@@ -40,7 +40,6 @@
 
 <script>
     import TodoElement from './Element'
-    import { mapGetters } from 'vuex'
     export default {
         name: 'todo-main',
         data () {
@@ -53,7 +52,7 @@
                     priority: 3,
                     isComplete: false,
                     isExpired: false,
-                    ownerId: this.$store.getters._id
+                    ownerUID: this.$store.getters.uid
                 }
             }
         },
@@ -80,6 +79,8 @@
                 // 디비 insert이후 _id값 받아서 formInstance에 저장
                 this.elems.push(formInstance)
                 this.$refs.createForm.hide()
+
+                this.$store.dispatch('createTodo', formInstance)
 
                 // reset form
                 this.formData.title = ''

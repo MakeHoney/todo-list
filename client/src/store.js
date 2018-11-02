@@ -8,26 +8,26 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         userInfo: {
-            _id: localStorage.getItem('_id'),
+            uid: localStorage.getItem('uid'),
             accessToken: localStorage.getItem('accessToken')
         }
     },
     getters: {
         accessToken: state => state.userInfo.accessToken,
-        _id: state => state.userInfo._id
+        uid: state => state.userInfo.uid
     },
     mutations: {
-        signIn (state, { _id, token }) {
+        signIn (state, { uid, token }) {
             state.userInfo.accessToken = token
-            state.userInfo._id = _id
+            state.userInfo.uid = uid
             localStorage.setItem('accessToken', token)
-            localStorage.setItem('_id', _id)
+            localStorage.setItem('uid', uid)
         },
         signOut (state) {
             state.userInfo.accessToken = null
-            state.userInfo._id = ''
+            state.userInfo.uid = ''
             localStorage.removeItem('accessToken')
-            localStorage.removeItem('_id')
+            localStorage.removeItem('uid')
         }
     },
     actions: {
@@ -50,6 +50,14 @@ export default new Vuex.Store({
         },
         signOut ({ commit }) {
             commit('signOut')
+        },
+        async createTodo ({ commit }, { formData }) {
+            let url = `${config.API_URI}/todo/create`
+            try {
+                await axios.post(url, { formData })
+            } catch (err) {
+                throw err
+            }
         }
     }
 })
