@@ -10,11 +10,13 @@ export default new Vuex.Store({
         userInfo: {
             uid: localStorage.getItem('uid'),
             accessToken: localStorage.getItem('accessToken')
-        }
+        },
+        todoList: null
     },
     getters: {
         accessToken: state => state.userInfo.accessToken,
-        uid: state => state.userInfo.uid
+        uid: state => state.userInfo.uid,
+        todoList: state => state.todoList
     },
     mutations: {
         signIn (state, { uid, token }) {
@@ -28,6 +30,9 @@ export default new Vuex.Store({
             state.userInfo.uid = ''
             localStorage.removeItem('accessToken')
             localStorage.removeItem('uid')
+        },
+        setTodoList (state, list) {
+            state.todoList = list
         }
     },
     actions: {
@@ -51,7 +56,16 @@ export default new Vuex.Store({
         signOut ({ commit }) {
             commit('signOut')
         },
-        async createTodo ({ commit }, { formData }) {
+        async loadTodoList({ commit }, uid) {
+            let url = `${config.API_URI}/todo/read`
+            try {
+                let { data } = await axios.post(url, { uid })
+                commit('setTodoList', data.todoList)
+            } catch (err) {
+                throw err
+            }
+        },
+        async createTodo ({ commit }, formData) {
             let url = `${config.API_URI}/todo/create`
             try {
                 await axios.post(url, { formData })

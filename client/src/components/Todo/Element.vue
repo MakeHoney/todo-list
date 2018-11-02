@@ -27,9 +27,6 @@
                 else return '★'
             }
         },
-        methods: {
-
-        },
         watch: {
             isChecked () {
                 let elContainer = this.$el.querySelector('.el-container')

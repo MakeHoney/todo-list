@@ -1,14 +1,14 @@
 <template>
     <div class="todo-main">
         <div class="todo-container">
-            <h5 v-if="!elems.length">리스트를 등록해주세요!</h5>
-            <div v-for="elem in elems">
-                <todo-element class="toElem" :title="elem.title"
-                                             :description="elem.description"
-                                             :priority="elem.priority"
-                                             :deadline="elem.deadline"
-                                             :isComplete="elem.isComplete"
-                                             :isExpired="elem.isExpired"></todo-element>
+            <h5 v-if="!todoList.length">리스트를 등록해주세요!</h5>
+            <div v-for="todo in todoList">
+                <todo-element class="toElem" :title="todo.title"
+                                             :description="todo.description"
+                                             :priority="todo.priority"
+                                             :deadline="todo.deadline"
+                                             :isComplete="todo.isComplete"
+                                             :isExpired="todo.isExpired"></todo-element>
             </div>
         </div>
         <b-btn class="form-trigger-button" @click="triggerForm()">Todo 등록</b-btn>
@@ -44,7 +44,7 @@
         name: 'todo-main',
         data () {
             return {
-                elems: [],
+                todoList: [],
                 formData: {
                     title: '',
                     description: '',
@@ -77,7 +77,7 @@
                 console.log(formInstance)
 
                 // 디비 insert이후 _id값 받아서 formInstance에 저장
-                this.elems.push(formInstance)
+                this.todoList.push(formInstance)
                 this.$refs.createForm.hide()
 
                 this.$store.dispatch('createTodo', formInstance)
@@ -90,6 +90,10 @@
                 this.isComplete = false
                 this.isExpired = false
             }
+        },
+        async created () {
+            await this.$store.dispatch('loadTodoList', this.formData.ownerUID)
+            this.todoList = this.$store.getters.todoList
         }
     }
 </script>
