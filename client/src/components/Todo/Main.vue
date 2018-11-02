@@ -2,8 +2,9 @@
     <div class="todo-main">
         <div class="todo-container">
             <h5 v-if="!todoList.length">리스트를 등록해주세요!</h5>
-            <div v-for="todo in todoList">
-                <todo-element class="toElem" :title="todo.title"
+            <div v-for="todo in todoList" :key="todo._id">
+                <todo-element class="toElem" :_id="todo._id"
+                                             :title="todo.title"
                                              :description="todo.description"
                                              :priority="todo.priority"
                                              :deadline="todo.deadline"
@@ -12,12 +13,14 @@
             </div>
         </div>
         <b-btn class="form-trigger-button" @click="triggerForm()">Todo 등록</b-btn>
+        <!--// checked 일때만 버튼 보이기-->
+        <b-btn class="form-trigger-button" @click="deleteCheckedTodo()">삭제</b-btn>
         {{ formData.ownerUID }}
 
         <b-modal ref="createForm" size="lg" hide-footer title="정보 입력">
             <!-- 입력 안된 경우 예외처리 -->
             <!-- 모달 child component로 빼기 -->
-            <form @submit.prevent="onSubmit(formData)">
+            <form @submit.prevent="submitCreateTodoForm(formData)">
                 <label for="todo-title">제목</label>
                 <input type="text" id="todo-title" v-model="formData.title">
                 <label for="todo-desc">내용</label>
@@ -63,9 +66,8 @@
             triggerForm () {
                 this.$refs.createForm.show()
             },
-            onSubmit(formData) {
+            async submitCreateTodoForm(formData) {
                 let formInstance = Object.assign({}, formData)
-
                 formInstance.priority = parseInt(formInstance.priority)
                 let yyyymmdd = formInstance.deadline.split('-')
                 let intDate = (new Date(yyyymmdd[0], yyyymmdd[1] - 1, yyyymmdd[2])).getTime()
@@ -74,15 +76,21 @@
                 ? formInstance.isExpired = false
                 : formInstance.isExpired = true
 
-                console.log(formInstance)
-
-                // 디비 insert이후 _id값 받아서 formInstance에 저장
+                await this.$store.dispatch('createTodo', formInstance)
                 this.todoList.push(formInstance)
                 this.$refs.createForm.hide()
 
-                this.$store.dispatch('createTodo', formInstance)
-
-                // reset form
+                this.resetForm()
+            },
+            async deleteCheckedTodo () {
+                const checkedTodoList = this.$store.state.checkedElements
+                await this.$store.dispatch('deleteTodo', checkedTodoList)
+            },
+            async loadTodoList() {
+                await this.$store.dispatch('loadTodoList', this.formData.ownerUID)
+                this.todoList = this.$store.getters.todoList
+            },
+            resetForm () {
                 this.formData.title = ''
                 this.formData.description = ''
                 this.formData.priority = -1
@@ -92,15 +100,16 @@
             }
         },
         async created () {
-            await this.$store.dispatch('loadTodoList', this.formData.ownerUID)
-            this.todoList = this.$store.getters.todoList
+            await this.loadTodoList()
+        },
+        async beforeUpdate () {
+            await this.loadTodoList()
         }
     }
 </script>
 
 <style scoped>
     .todo-container {
-        /*position: relative;*/
         border-radius: 15px;
         background-color: #8ec0e4;
         text-align: center;

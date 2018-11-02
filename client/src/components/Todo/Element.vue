@@ -3,10 +3,11 @@
         <div class="el-container">
             <p class="el-title">{{ title }} [{{ calculStar }}]</p>
             <p class="el-desc">{{ description }}</p>
-            <input type="checkbox" id="checkbox" v-model="isChecked">
+            <input type="checkbox" class="checkbox" v-model="isChecked" :value="_id">
             <p class="el-deadline">마감 날짜: {{ deadline }}</p>
             <b-btn class="el-button" size="sm">수정</b-btn>
         </div>
+        {{ isChecked }}
     </div>
 </template>
 
@@ -31,13 +32,21 @@
             isChecked () {
                 let elContainer = this.$el.querySelector('.el-container')
                 if(this.isChecked) {
+                    this.$store.commit('addCheckedElement', this._id)
+                    // for(let key in this.$store.getters.checkedElements) {
+                    //     console.log(this.$store.getters.checkedElements[key])
+                    // }
                     elContainer.style.backgroundColor = '#276DE9'
                 } else {
+                    this.$store.commit('deleteCheckedElement', this._id)
                     elContainer.style.backgroundColor = '#cadbe9'
                 }
             }
         },
         props: {
+            _id: {
+                type: String
+            },
             title: {
                 type: String
             },
@@ -56,6 +65,12 @@
             isExpired: {
                 type: Boolean
             }
+        },
+        beforeDestroy () {
+            this.isChecked = false
+        },
+        destroyed () {
+            this.isChecked = false
         }
     }
 </script>
@@ -81,7 +96,7 @@
         text-align: right;
         margin: auto 30px auto auto;
     }
-    #checkbox {
+    .checkbox {
         float: right;
         margin: auto 10px auto auto;
     }

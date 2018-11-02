@@ -11,12 +11,14 @@ export default new Vuex.Store({
             uid: localStorage.getItem('uid'),
             accessToken: localStorage.getItem('accessToken')
         },
-        todoList: null
+        todoList: [],
+        checkedElements: {}
     },
     getters: {
         accessToken: state => state.userInfo.accessToken,
         uid: state => state.userInfo.uid,
-        todoList: state => state.todoList
+        todoList: state => state.todoList,
+        checkedElements: state => state.checkedElements
     },
     mutations: {
         signIn (state, { uid, token }) {
@@ -33,6 +35,12 @@ export default new Vuex.Store({
         },
         setTodoList (state, list) {
             state.todoList = list
+        },
+        addCheckedElement (state, _id) {
+            state.checkedElements[_id] = _id
+        },
+        deleteCheckedElement (state, _id) {
+            delete state.checkedElements[_id]
         }
     },
     actions: {
@@ -71,6 +79,17 @@ export default new Vuex.Store({
                 await axios.post(url, { formData })
             } catch (err) {
                 throw err
+            }
+        },
+        async deleteTodo({ commit }, elements) {
+            let url = `${config.API_URI}/todo/delete`
+            try {
+                await axios.post(url, { elements })
+            } catch (err) {
+                throw err
+            }
+            for (let key in elements) {
+                delete elements[key]
             }
         }
     }
