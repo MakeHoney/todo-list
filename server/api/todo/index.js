@@ -7,4 +7,8 @@ router.get('/', (req, res, next) => {
     })
 })
 
+router.post('/create')
+router.post('/delete')
+router.post('/update')
+
 module.exports = router

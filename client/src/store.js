@@ -7,19 +7,27 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        accessToken: localStorage.getItem('accessToken')
+        userInfo: {
+            _id: localStorage.getItem('_id'),
+            accessToken: localStorage.getItem('accessToken')
+        }
     },
     getters: {
-        accessToken: state => state.accessToken
+        accessToken: state => state.userInfo.accessToken,
+        _id: state => state.userInfo._id
     },
     mutations: {
-        signIn (state, { token }) {
-            state.accessToken = token
+        signIn (state, { _id, token }) {
+            state.userInfo.accessToken = token
+            state.userInfo._id = _id
             localStorage.setItem('accessToken', token)
+            localStorage.setItem('_id', _id)
         },
         signOut (state) {
-            state.accessToken = null
+            state.userInfo.accessToken = null
+            state.userInfo._id = ''
             localStorage.removeItem('accessToken')
+            localStorage.removeItem('_id')
         }
     },
     actions: {
