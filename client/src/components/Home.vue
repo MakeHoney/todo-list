@@ -15,10 +15,6 @@ import Todo from './Todo/Main'
 import { mapGetters } from 'vuex'
 export default {
     name: 'home',
-    data () {
-        return {
-        }
-    },
     computed: {
         ...mapGetters([
             'accessToken'
