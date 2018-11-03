@@ -72,7 +72,8 @@
                 'todoList',
                 'checkedElements',
                 'emptyCheck',
-                'submitFor'
+                'submitFor',
+                'selectedElementTID'
             ])
         },
         methods: {
@@ -94,10 +95,14 @@
                 intDate > Date.now()
                 ? formInstance.isExpired = false
                 : formInstance.isExpired = true
-
+                console.log(formInstance)
                 this.submitFor === 'create'
                 ? await this.$store.dispatch('createTodo', formInstance)
-                : await this.$store.dispatch('createTodo', formInstance)
+                : await this.$store.dispatch('updateTodo',
+                    {
+                        tid: this.selectedElementTID,
+                        formData: formInstance
+                    })
 
                 await this.loadTodoList()
                 this.$refs.createForm.hide()
@@ -125,8 +130,6 @@
                 this.formData.description = todo.description
                 this.formData.priority = todo.priority
                 this.formData.deadline = todo.deadline
-
-                console.log(this.formData)
                 this.triggerForm()
             },
             resetForm () {

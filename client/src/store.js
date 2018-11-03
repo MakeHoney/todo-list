@@ -14,7 +14,8 @@ export default new Vuex.Store({
         todoList: [],
         checkedElements: {},
         emptyCheck: 0,
-        submitFor: 'create'
+        submitFor: 'create',
+        selectedElementTID: ''
     },
     getters: {
         accessToken: state => state.userInfo.accessToken,
@@ -22,7 +23,8 @@ export default new Vuex.Store({
         todoList: state => state.todoList,
         checkedElements: state => state.checkedElements,
         emptyCheck: state => state.emptyCheck,
-        submitFor: state => state.submitFor
+        submitFor: state => state.submitFor,
+        selectedElementTID: state => state.selectedElementTID
     },
     mutations: {
         signIn (state, { uid, token }) {
@@ -49,7 +51,10 @@ export default new Vuex.Store({
             state.emptyCheck--
         },
         setSubmitFor (state, flag) {
-            state.isTodoUpdate = flag
+            state.submitFor = flag
+        },
+        setSelectedElementTID (state, tid) {
+            state.selectedElementTID = tid
         }
     },
     actions: {
@@ -77,7 +82,6 @@ export default new Vuex.Store({
             let url = `${config.API_URI}/todo/read-all`
             try {
                 let { data } = await axios.post(url, { uid })
-                console.log(data)
                 commit('setTodoList', data.todoList)
             } catch (err) {
                 throw err
@@ -106,7 +110,16 @@ export default new Vuex.Store({
         async loadTodo({ commit }, tid) {
             let url = `${config.API_URI}/todo/read`
             try {
+                commit('setSelectedElementTID', tid)
                 return (await axios.post(url, { tid })).data.todo
+            } catch (err) {
+                throw err
+            }
+        },
+        async updateTodo({ commit }, { tid, formData }) {
+            let url = `${config.API_URI}/todo/update`
+            try {
+                await axios.post(url, { tid, formData })
             } catch (err) {
                 throw err
             }
