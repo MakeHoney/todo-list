@@ -42,3 +42,11 @@ exports.deleteTodo = async (req, res) => {
         message: 'success'
     })
 }
+
+exports.loadTodo = async (req, res) => {
+    let { tid } = req.body
+    const todo = await Todo.findTodoByTID(tid)
+    res.json({
+        todo
+    })
+}
