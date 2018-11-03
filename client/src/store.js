@@ -100,11 +100,11 @@ export default new Vuex.Store({
             try {
                 await axios.post(url, { elements })
                 state.emptyCheck = 0
+                for (let key in elements) {
+                    delete elements[key]
+                }
             } catch (err) {
                 throw err
-            }
-            for (let key in elements) {
-                delete elements[key]
             }
         },
         async loadTodo({ commit }, tid) {

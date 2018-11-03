@@ -104,13 +104,13 @@
                         formData: formInstance
                     })
 
-                await this.loadTodoList()
+                this.loadTodoList()
                 this.$refs.createForm.hide()
                 this.resetForm()
             },
             async deleteCheckedTodo () {
                 await this.$store.dispatch('deleteTodo', this.checkedElements)
-                await this.loadTodoList()
+                this.loadTodoList()
             },
             async deleteExpiredTodo () {
                 const elements = this.todoList.filter(todoObj => todoObj.isExpired)
@@ -119,7 +119,7 @@
                     expiredElemObj[elem._id] = elem._id
                 })
                 await this.$store.dispatch('deleteTodo', expiredElemObj)
-                await this.loadTodoList()
+                this.loadTodoList()
             },
             async loadTodoList() {
                 await this.$store.dispatch('loadTodoList', this.formData.ownerUID)
@@ -142,7 +142,7 @@
             }
         },
         async created () {
-            await this.loadTodoList()
+            this.loadTodoList()
         },
         async updated () {
             // await this.loadTodoList()
