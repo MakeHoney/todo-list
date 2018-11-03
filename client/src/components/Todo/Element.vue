@@ -5,6 +5,7 @@
             <p class="el-desc">{{ description }}</p>
             <input type="checkbox" class="checkbox" v-model="isChecked" :value="_id">
             <p class="el-deadline">마감 날짜: {{ deadline }}</p>
+            <b-btn class="el-button" size="sm" @click="triggerUpdate">수정</b-btn>
         </div>
         {{ isExpired }}
     </div>
@@ -25,6 +26,11 @@
                 if (this.priority === 0) return '★★★'
                 else if(this.priority === 1) return '★★'
                 else return '★'
+            }
+        },
+        methods: {
+            triggerUpdate () {
+                this.$emit('updateTodo', this._id)
             }
         },
         watch: {

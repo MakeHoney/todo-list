@@ -13,14 +13,16 @@ export default new Vuex.Store({
         },
         todoList: [],
         checkedElements: {},
-        emptyCheck: 0
+        emptyCheck: 0,
+        submitFor: 'create'
     },
     getters: {
         accessToken: state => state.userInfo.accessToken,
         uid: state => state.userInfo.uid,
         todoList: state => state.todoList,
         checkedElements: state => state.checkedElements,
-        emptyCheck: state => state.emptyCheck
+        emptyCheck: state => state.emptyCheck,
+        submitFor: state => state.submitFor
     },
     mutations: {
         signIn (state, { uid, token }) {
@@ -45,6 +47,9 @@ export default new Vuex.Store({
         deleteCheckedElement (state, _id) {
             delete state.checkedElements[_id]
             state.emptyCheck--
+        },
+        setSubmitFor (state, flag) {
+            state.isTodoUpdate = flag
         }
     },
     actions: {
@@ -72,6 +77,7 @@ export default new Vuex.Store({
             let url = `${config.API_URI}/todo/read-all`
             try {
                 let { data } = await axios.post(url, { uid })
+                console.log(data)
                 commit('setTodoList', data.todoList)
             } catch (err) {
                 throw err
@@ -98,9 +104,9 @@ export default new Vuex.Store({
             }
         },
         async loadTodo({ commit }, tid) {
-            let url = `${config.API_URI}/`
+            let url = `${config.API_URI}/todo/read`
             try {
-                await axios(url, { tid })
+                return (await axios.post(url, { tid })).data.todo
             } catch (err) {
                 throw err
             }
