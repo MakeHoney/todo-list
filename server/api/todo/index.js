@@ -1,8 +1,13 @@
 const express = require('express')
-const { createTodo, loadTodoList, deleteTodo } = require('./controller')
 const router = express.Router()
+const {
+    createTodo,
+    loadTodoList,
+    deleteTodo,
+    loadTodo
+} = require('./controller')
 
-router.post('/read')
+router.post('/read', loadTodo)
 router.post('/read-all', loadTodoList)
 router.post('/create', createTodo)
 router.post('/delete', deleteTodo)
