@@ -22,4 +22,10 @@ Todo.statics.findTodosByUID = async function (uid) {
     })
 }
 
+Todo.statics.findTodoByTID = async function (tid) {
+    return await this.find({
+        _id: mongoose.Types.ObjectId(tid)
+    })
+}
+
 module.exports = mongoose.model('Todo', Todo)
