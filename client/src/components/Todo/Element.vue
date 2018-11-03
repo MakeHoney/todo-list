@@ -5,7 +5,6 @@
             <p class="el-desc">{{ description }}</p>
             <input type="checkbox" class="checkbox" v-model="isChecked" :value="_id">
             <p class="el-deadline">마감 날짜: {{ deadline }}</p>
-            <b-btn class="el-button" size="sm">수정</b-btn>
         </div>
         {{ isExpired }}
     </div>

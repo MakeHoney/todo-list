@@ -96,6 +96,14 @@ export default new Vuex.Store({
             for (let key in elements) {
                 delete elements[key]
             }
+        },
+        async loadTodo({ commit }, tid) {
+            let url = `${config.API_URI}/`
+            try {
+                await axios(url, { tid })
+            } catch (err) {
+                throw err
+            }
         }
     }
 })

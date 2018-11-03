@@ -9,7 +9,9 @@
                                              :priority="todo.priority"
                                              :deadline="todo.deadline"
                                              :isComplete="todo.isComplete"
-                                             :isExpired="todo.isExpired"></todo-element>
+                                             :isExpired="todo.isExpired">
+                    <b-btn class="el-button" size="sm">수정</b-btn>
+                </todo-element>
             </div>
         </div>
         <b-btn class="form-trigger-button" @click="triggerForm()">Todo 등록</b-btn>
