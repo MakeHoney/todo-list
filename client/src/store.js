@@ -69,7 +69,7 @@ export default new Vuex.Store({
             commit('signOut')
         },
         async loadTodoList({ commit }, uid) {
-            let url = `${config.API_URI}/todo/read`
+            let url = `${config.API_URI}/todo/read-all`
             try {
                 let { data } = await axios.post(url, { uid })
                 commit('setTodoList', data.todoList)
