@@ -38,6 +38,7 @@
             isChecked () {
                 let elContainer = this.$refs['elContainer']
                 if(this.isChecked) {
+                    console.log(this._id)
                     this.$store.commit('addCheckedElement', this._id)
                     elContainer.style.backgroundColor = '#276DE9'
                 } else {

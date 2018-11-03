@@ -18,7 +18,10 @@ export default new Vuex.Store({
         selectedElementTID: ''
     },
     getters: {
+        // for auth
         accessToken: state => state.userInfo.accessToken,
+
+        // for main.vue
         uid: state => state.userInfo.uid,
         todoList: state => state.todoList,
         checkedElements: state => state.checkedElements,

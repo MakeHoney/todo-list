@@ -95,7 +95,7 @@
                 intDate > Date.now()
                 ? formInstance.isExpired = false
                 : formInstance.isExpired = true
-                console.log(formInstance)
+
                 this.submitFor === 'create'
                 ? await this.$store.dispatch('createTodo', formInstance)
                 : await this.$store.dispatch('updateTodo',
