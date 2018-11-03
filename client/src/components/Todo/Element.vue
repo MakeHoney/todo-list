@@ -25,7 +25,8 @@
             calculStar () {
                 if (this.priority === 0) return '★★★'
                 else if(this.priority === 1) return '★★'
-                else return '★'
+                else if(this.priority === 2) return '★'
+                else return ''
             }
         },
         methods: {
