@@ -4,13 +4,14 @@ const {
     createTodo,
     loadTodoList,
     deleteTodo,
-    loadTodo
+    loadTodo,
+    updateTodo
 } = require('./controller')
 
 router.post('/read', loadTodo)
 router.post('/read-all', loadTodoList)
 router.post('/create', createTodo)
 router.post('/delete', deleteTodo)
-router.post('/update')
+router.post('/update', updateTodo)
 
 module.exports = router

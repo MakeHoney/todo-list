@@ -19,6 +19,24 @@ exports.createTodo = async (req, res) => {
     }
 }
 
+exports.updateTodo = async (req, res) => {
+    const { tid, formData } = req.body
+    const updateTodo = (tid, formData) => {
+        Todo.updateTodo(tid, formData)
+    }
+
+    try {
+        updateTodo(tid, formData)
+        res.json({
+            message: 'successfully updated'
+        })
+    } catch (err) {
+        res.status(409).json({
+            message: err.message
+        })
+    }
+}
+
 exports.loadTodoList = async (req, res) => {
     const { uid } = req.body
     const todoList = await Todo.findTodosByUID(uid)
