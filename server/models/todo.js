@@ -23,8 +23,8 @@ Todo.statics.findTodosByUID = async function (uid) {
 }
 
 Todo.statics.findTodoByTID = async function (tid) {
-    return await this.find({
-        _id: mongoose.Types.ObjectId(tid)
+    return await this.findOne({
+        _id: await mongoose.Types.ObjectId(tid)
     })
 }
 
