@@ -1,13 +1,15 @@
 <template>
     <div class="todo-element">
         <div ref="elContainer" class="el-container">
-            <p class="el-title">{{ title }} [{{ calculStar }}]</p>
+            <p class="el-title" v-if="priority === 3">{{ title }}</p>
+            <p class="el-title" v-else>{{ title }} [{{ calculStar }}]</p>
             <p class="el-desc">{{ description }}</p>
             <input type="checkbox" class="checkbox" v-model="isChecked" :value="_id">
-            <p class="el-deadline">마감 날짜: {{ deadline }}</p>
-            <b-btn class="el-button" size="sm" @click="triggerUpdate">수정</b-btn>
+            <p class="el-deadline" v-if="deadline">마감 날짜: {{ deadline }}</p>
+            <b-btn class="hide-button" size="sm"></b-btn>
+            <b-btn class="el-button" size="sm" v-if="!isExpired && !isComplete "@click="triggerUpdate">수정</b-btn>
+            <b-btn class="el-button" size="sm" v-if="!isExpired && !isComplete" @click="triggerComplete">완료</b-btn>
         </div>
-        {{ isExpired }}
     </div>
 </template>
 
@@ -32,18 +34,29 @@
         methods: {
             triggerUpdate () {
                 this.$emit('updateTodo', this._id)
+            },
+            triggerComplete () {
+                let elContainer = this.$refs['elContainer']
+                this.$emit('completeTodo', this._id)
+                elContainer.style.backgroundColor = 'red'
+                this.$refs['elContainer'].style.textDecoration = 'line-through'
             }
         },
         watch: {
             isChecked () {
                 let elContainer = this.$refs['elContainer']
                 if(this.isChecked) {
-                    console.log(this._id)
                     this.$store.commit('addCheckedElement', this._id)
                     elContainer.style.backgroundColor = '#276DE9'
                 } else {
                     this.$store.commit('deleteCheckedElement', this._id)
-                    elContainer.style.backgroundColor = '#cadbe9'
+                    if (this.isExpired) {
+                        elContainer.style.backgroundColor = '#7b7b7b'
+                    } else if(this.isComplete) {
+                        elContainer.style.backgroundColor = 'red'
+                    } else {
+                        elContainer.style.backgroundColor = '#cadbe9'
+                    }
                 }
             }
         },
@@ -69,6 +82,13 @@
             isExpired: {
                 type: Boolean
             }
+        },
+        mounted() {
+            if(this.isComplete) {
+                this.$refs['elContainer'].style.backgroundColor = 'red'
+                this.$refs['elContainer'].style.textDecoration = 'line-through'
+            }
+            if(this.isExpired) this.$refs['elContainer'].style.backgroundColor = '#7b7b7b'
         },
         beforeDestroy () {
             this.isChecked = false
@@ -102,11 +122,15 @@
     }
     .checkbox {
         float: right;
-        margin: auto 10px auto auto;
+        margin: auto 10px auto 10px;
     }
     .el-button {
         background-color: #648dd1;
         border-color: #648dd1;
+        margin: 4px 0 4px 0;
         width: 90%;
+    }
+    .hide-button {
+        visibility: hidden;
     }
 </style>
