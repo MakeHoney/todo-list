@@ -134,6 +134,9 @@
             async deleteExpiredTodo () {
                 const elements = this.todoList.filter(todoObj => todoObj.isExpired)
                 let expiredElemObj = {}
+                elements.forEach(elem => {
+                    expiredElemObj[elem._id] = elem._id
+                })
                 await this.$store.dispatch('deleteTodo', expiredElemObj)
                 this.loadTodoList()
             },
