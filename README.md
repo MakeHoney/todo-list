@@ -16,7 +16,7 @@ server를 먼저 켜신 후에 client를 실행하면 Todo 앱을 실행하실 �
   * 저장소 추가
 
     ```
-    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
     ```
 
   * 설치
