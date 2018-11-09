@@ -2,7 +2,8 @@
 
 배포 URL:  http://programmers-winter-internship.s3-website.ap-northeast-2.amazonaws.com/
 
-위 URL에서 직접 app을 사용해 보실 수 있습니다.
+위 URL에서 직접 app을 사용해 보실 수 있습니다. <br/>
+(모바일 크롬 환경을 추천합니다.)
 
 
 
