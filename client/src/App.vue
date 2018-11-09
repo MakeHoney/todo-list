@@ -24,9 +24,6 @@
 </script>
 
 <style>
-    body {
-        background-color: #f0e5de;
-    }
     #title {
         text-align: center;
         font-weight: bold;
