@@ -1,7 +1,7 @@
 <template>
     <div class="sign-in">
         <div class="login-form">
-            <h2>로그인</h2>
+            <h3 class="signin-title">로그인</h3>
             <form @submit.prevent="onSubmit(userInfo)">
                 <input type="text" placeholder="아이디" id="uid" v-model="userInfo.uid">
                 <input type="password" placeholder="비밀번호" id="password" v-model="userInfo.password">
@@ -46,14 +46,16 @@ export default {
         background-color: #e4e3e4;
         border-radius: 25px;
         text-align: center;
-        width: 50%;
+        width: 80%;
         height: 70%;
-        padding: 50px;
+        padding: 10px;
         margin: 40px auto;
     }
     #uid, #password {
         display: block;
         padding: 10px;
+        border-radius: 10px;
+        border: none;
         margin: 10px auto 10px auto;
         width: 100%;
     }
@@ -61,5 +63,8 @@ export default {
         display: block;
         margin: 10px auto 10px auto;
         padding: 0 10px 0 10px;
+    }
+    .signin-title {
+        padding: 10px;
     }
 </style>

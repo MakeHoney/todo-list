@@ -201,14 +201,14 @@
         border-radius: 15px;
         background-color: #8ec0e4;
         text-align: center;
-        margin: 40px auto 20px auto;
-        padding: 50px;
-        width: 60%;
+        margin: 20px auto 20px auto;
+        padding: 20px;
+        width: 80%;
     }
     .button-main {
         display: block;
         margin: 10px auto 10px auto;
-        width: 60%;
+        width: 80%;
     }
     #todo-deadline,
     #todo-desc,
@@ -238,10 +238,10 @@
         transition: all 0.1s ease-in-out;
     }
     .toElem:hover {
-        transform: scale(1.05);
-        -webkit-transform: scale(1.05);
-        -moz-transform: scale(1.05);
-        -ms-transform: scale(1.05);
-        -o-transform: scale(1.05);
+        transform: scale(1.03);
+        -webkit-transform: scale(1.03);
+        -moz-transform: scale(1.03);
+        -ms-transform: scale(1.03);
+        -o-transform: scale(1.03);
     }
 </style>

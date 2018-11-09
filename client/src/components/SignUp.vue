@@ -1,7 +1,7 @@
 <template>
     <div class="sign-up">
         <div class="signup-form">
-            <h2>회원가입</h2>
+            <h3 class="signup-title">회원가입</h3>
             <form @submit.prevent="onSubmit(uid, password)">
                 <input type="text" placeholder="아이디" id="uid" v-model="uid">
                 <input type="password" placeholder="비밀번호" id="password" v-model="password">
@@ -55,14 +55,16 @@ export default {
         background-color: #e4e3e4;
         border-radius: 25px;
         text-align: center;
-        width: 50%;
+        width: 80%;
         height: 70%;
-        padding: 50px;
+        padding: 10px;
         margin: 40px auto;
     }
     #uid, #password {
         display: block;
         padding: 10px;
+        border-radius: 10px;
+        border: none;
         margin: 10px auto 10px auto;
         width: 100%;
     }
@@ -70,5 +72,8 @@ export default {
         display: block;
         margin: 10px auto 10px auto;
         padding: 0 10px 0 10px;
+    }
+    .signup-title {
+        padding: 10px;
     }
 </style>
