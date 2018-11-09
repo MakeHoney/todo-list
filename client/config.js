@@ -1,3 +1,3 @@
 export default {
-    API_URI: 'http://localhost:8888'
+    API_URI: 'http://13.209.8.64/server/api'
 }
