@@ -21,7 +21,8 @@
         </div>
         <b-btn class="button-main" @click="triggerEmptyForm()">Todo 등록</b-btn>
         <b-btn class="button-main" @click="sortListByPriority()">우선순위 정렬</b-btn>
-        <b-btn class="button-main" @click="deleteExpiredTodo()">만료된 Todo 삭제</b-btn>
+        <b-btn class="button-main" @click="deleteSpecificTodo('isExpired')">만료된 Todo 삭제</b-btn>
+        <b-btn class="button-main" @click="deleteSpecificTodo('isComplete')">완료된 Todo 삭제</b-btn>
         <!--// checked 일때만 버튼 보이기-->
         <b-btn class="button-main"  v-if="emptyCheck"
                                             @click="deleteCheckedTodo()">선택된 Todo 삭제</b-btn>
@@ -131,13 +132,13 @@
                 await this.$store.dispatch('deleteTodo', this.checkedElements)
                 this.loadTodoList()
             },
-            async deleteExpiredTodo () {
-                const elements = this.todoList.filter(todoObj => todoObj.isExpired)
-                let expiredElemObj = {}
+            async deleteSpecificTodo (opt) {
+                const elements = this.todoList.filter(todoObj => todoObj[opt])
+                let filteredElemObj = {}
                 elements.forEach(elem => {
-                    expiredElemObj[elem._id] = elem._id
+                    filteredElemObj[elem._id] = elem._id
                 })
-                await this.$store.dispatch('deleteTodo', expiredElemObj)
+                await this.$store.dispatch('deleteTodo', filteredElemObj)
                 this.loadTodoList()
             },
             async loadTodoList() {
