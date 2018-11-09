@@ -1,6 +1,12 @@
 ### README
 
-Ubuntu 기준으로 작성하였습니다.
+배포 URL:  http://programmers-winter-internship.s3-website.ap-northeast-2.amazonaws.com/
+
+위 URL에서 직접 app을 사용해 보실 수 있습니다.
+
+
+
+_Ubuntu 기준으로 작성하였습니다._
 
 ```
 client는 Vue.js로 동작하고 server는 Node.js로 동작합니다. 

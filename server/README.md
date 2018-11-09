@@ -1,10 +1,9 @@
-Ubuntu 기준으로 작성하였습니다.
-
+_Ubuntu 기준으로 작성하였습니다._
 
 
 ##### Requirements
 
-* mongodb (recommended version: 2.6.10)
+* mongodb
 
   ```
   apt-get install mongodb-clients mongodb-server
