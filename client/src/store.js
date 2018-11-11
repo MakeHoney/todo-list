@@ -18,16 +18,8 @@ export default new Vuex.Store({
         selectedElementTID: ''
     },
     getters: {
-        // for auth
         accessToken: state => state.userInfo.accessToken,
-
-        // for main.vue
-        uid: state => state.userInfo.uid,
-        todoList: state => state.todoList,
-        checkedElements: state => state.checkedElements,
-        emptyCheck: state => state.emptyCheck,
-        submitFor: state => state.submitFor,
-        selectedElementTID: state => state.selectedElementTID
+        uid: state => state.userInfo.uid
     },
     mutations: {
         signIn (state, { uid, token }) {

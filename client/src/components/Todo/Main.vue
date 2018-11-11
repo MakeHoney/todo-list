@@ -62,7 +62,7 @@
 
 <script>
     import TodoElement from './Element'
-    import { mapGetters } from 'vuex'
+    import { mapState } from 'vuex'
     export default {
         name: 'todo-main',
         data () {
@@ -84,7 +84,7 @@
             TodoElement
         },
         computed: {
-            ...mapGetters([
+            ...mapState([
                 'todoList',
                 'checkedElements',
                 'emptyCheck',
